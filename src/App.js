@@ -3,13 +3,13 @@ import React, { useState, useRef, useEffect } from 'react';
 export default function App() {
   const [todo, setTodo] = useState([
     {
-      listItem: 'Open your eyes',
+      listItem: 'Wake up',
     },
     {
       listItem: 'Brush your teeth',
     },
     {
-      listItem: 'Get off your bed',
+      listItem: 'Get dressed',
     },
   ]);
 
