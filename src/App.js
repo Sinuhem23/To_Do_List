@@ -24,6 +24,11 @@ export default function App() {
     addItemRef.current.value = '';
     console.log(todo);
   };
+  // const [list, setList] = React.useState(todo);
+
+  const deleteId = (id) => {
+    setTodo((prevState) => prevState.filter((_, index) => index !== id));
+  };
   // const addItem ()
   console.log('Outside of handleSubmit ', todo);
   return (
@@ -34,13 +39,15 @@ export default function App() {
         <input id='addItem' ref={addItemRef} type='text' required />
         <button>Add Todo</button>
       </form>
-      {todo.map((list, index) => (
-        <ul key={index}>
-          <li>{list.addItem}</li>
-          <input id='' type='checkbox' />
-          <button>Remove</button>
-        </ul>
-      ))}
+      <ul>
+        {todo.map((list, idx) => (
+          <li key={idx}>
+            {list.addItem}
+
+            <button onClick={() => deleteId(idx)}>Remove</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
