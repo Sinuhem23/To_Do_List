@@ -1,7 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 export default function App() {
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState([
+    {
+      listItem: 'Open your eyes',
+    },
+    {
+      listItem: 'Brush your teeth',
+    },
+    {
+      listItem: 'Get off your bed',
+    },
+  ]);
+
+  // const [todo, setTodo] = useState([]);
 
   let addItemRef = useRef();
 
@@ -24,11 +36,12 @@ export default function App() {
     addItemRef.current.value = '';
     console.log(todo);
   };
-  // const [list, setList] = React.useState(todo);
 
+  // Delete
   const deleteId = (id) => {
     setTodo((prevState) => prevState.filter((_, index) => index !== id));
   };
+
   // const addItem ()
   console.log('Outside of handleSubmit ', todo);
   return (
@@ -39,15 +52,16 @@ export default function App() {
         <input id='addItem' ref={addItemRef} type='text' required />
         <button>Add Todo</button>
       </form>
-      <ul>
+      <ol>
         {todo.map((list, idx) => (
           <li key={idx}>
+            {list.listItem}
             {list.addItem}
 
             <button onClick={() => deleteId(idx)}>Remove</button>
           </li>
         ))}
-      </ul>
+      </ol>
     </div>
   );
 }
