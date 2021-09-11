@@ -41,7 +41,7 @@ export default function App() {
     if (todo.length > 7) {
       alert('List is full!');
       // Not fully working yet
-      deleteId([todo]);
+      deleteId([todo.length] < 7);
     }
 
     setTodo((prevState) => prevState.concat(formData));

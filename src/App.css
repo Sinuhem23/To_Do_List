@@ -32,6 +32,7 @@ ol {
   padding: 2rem 4rem;
   justify-self: end;
   overflow: scroll;
+  height: 33rem;
 }
 
 li {
