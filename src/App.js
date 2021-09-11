@@ -1,7 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
+import useLocalStorage from './Hooks/useLocalStorage';
 
 export default function App() {
-  const [todo, setTodo] = useState([
+  // const [checked, setChecked] = useState(false);
+
+  const [todo, setTodo] = useLocalStorage('todos', [
     {
       listItem: 'Wake up',
     },
@@ -30,7 +33,6 @@ export default function App() {
     ];
     // console.log(formData.addItem)
     // console.log(formData)
-    // const newItem = () => setTodo([])
 
     setTodo((prevState) => prevState.concat(formData));
     addItemRef.current.value = '';
@@ -54,10 +56,11 @@ export default function App() {
       </form>
       <ol>
         {todo.map((list, idx) => (
-          <li key={idx}>
+          <li type='checkbox' key={idx}>
+            <input id='' type='checkbox' />
+
             {list.listItem}
             {list.addItem}
-
             <button onClick={() => deleteId(idx)}>Remove</button>
           </li>
         ))}
