@@ -8,15 +8,15 @@ export default function App() {
   // Using LocalStorage instead of useState (check the localStorage file)
   const [todo, setTodo] = useLocalStorage('todos', [
     {
-      listItem: 'Wake up',
+      defaultItem: 'Wake up',
       isChecked: true,
     },
     {
-      listItem: 'Brush your teeth',
+      defaultItem: 'Brush your teeth',
       isChecked: true,
     },
     {
-      listItem: 'Get dressed',
+      defaultItem: 'Get dressed',
       isChecked: false,
     },
   ]);
@@ -38,6 +38,11 @@ export default function App() {
     ];
     // console.log(formData.addItem)
     // console.log(formData)
+    if (todo.length > 7) {
+      alert('List is full!');
+      // Not fully working yet
+      deleteId([todo]);
+    }
 
     setTodo((prevState) => prevState.concat(formData));
     addItemRef.current.value = '';
@@ -59,27 +64,34 @@ export default function App() {
   // const addItem ()
   console.log('Outside of handleSubmit ', todo);
   return (
-    <div id='App'>
-      <h1>To Do List</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='addItem'>Add Item:</label>
-        <input id='addItem' ref={addItemRef} type='text' required />
-        <button>Add Todo</button>
-      </form>
-      <ol>
-        {todo.map((list, idx) => (
-          <li key={idx} className={list.isChecked ? 'done' : ''}>
-            <input
-              checked={list.isChecked}
-              type='checkbox'
-              onChange={() => updateListOfItems(idx, !list.isChecked)}
-            />
-            {list.listItem}
-            {list.addItem}
-            <button onClick={() => deleteId(idx)}>Remove</button>
-          </li>
-        ))}
-      </ol>
+    <div className='all_container'>
+      <div id='App'>
+        <form onSubmit={handleSubmit}>
+          <h1>To Do List</h1>
+
+          <label htmlFor='addItem'>Add Item:</label>
+          <input id='addItem' ref={addItemRef} type='text' required />
+          <button className='addTodoBtn'>Add Todo</button>
+        </form>
+        <div className='inner_container container_scroll'>
+          <ol>
+            {todo.map((list, idx) => (
+              <li key={idx} className={list.isChecked ? 'done' : 'boxCheck'}>
+                <input
+                  checked={list.isChecked}
+                  type='checkbox'
+                  onChange={() => updateListOfItems(idx, !list.isChecked)}
+                />
+                {list.defaultItem}
+                {list.addItem}
+                <button className='removeBtn' onClick={() => deleteId(idx)}>
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
     </div>
   );
 }
