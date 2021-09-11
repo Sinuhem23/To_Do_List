@@ -3,8 +3,8 @@
   background-image: url('./Image/190-1903453_background-clipart-file-tag-list-clip-arts-svg.png');
   background-size: contain;
   background-repeat: space;
+  margin: 3rem;
   height: 50rem;
-  /* padding: 5rem; */
   background-position-x: right;
 }
 #App {
@@ -92,13 +92,18 @@ label {
   /* border: 1px solid lightblue; */
   overflow: scroll;
 }
-
+@media (min-width: 1020px) {
+  .all_container {
+    background-repeat: no-repeat;
+  }
+}
 @media (max-width: 650px) {
   #App {
     grid-template-columns: none;
     margin-top: 3rem;
   }
   .all_container {
+    margin: 0;
     background-image: url();
     background-repeat: no-repeat;
   }
