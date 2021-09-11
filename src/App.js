@@ -1,18 +1,23 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import useLocalStorage from './Hooks/useLocalStorage';
+import './App.css';
 
 export default function App() {
-  // const [checked, setChecked] = useState(false);
-
+  // Using useState
+  // const [todo, setTodo] = useState([
+  // Using LocalStorage instead of useState (check the localStorage file)
   const [todo, setTodo] = useLocalStorage('todos', [
     {
       listItem: 'Wake up',
+      isChecked: true,
     },
     {
       listItem: 'Brush your teeth',
+      isChecked: true,
     },
     {
       listItem: 'Get dressed',
+      isChecked: false,
     },
   ]);
 
@@ -36,12 +41,19 @@ export default function App() {
 
     setTodo((prevState) => prevState.concat(formData));
     addItemRef.current.value = '';
+
     console.log(todo);
   };
 
   // Delete
   const deleteId = (id) => {
     setTodo((prevState) => prevState.filter((_, index) => index !== id));
+  };
+
+  const updateListOfItems = (isChecked, newsChecked) => {
+    const updatedListOfItems = [...todo];
+    updatedListOfItems[isChecked].isChecked = true;
+    setTodo(updatedListOfItems);
   };
 
   // const addItem ()
@@ -56,9 +68,12 @@ export default function App() {
       </form>
       <ol>
         {todo.map((list, idx) => (
-          <li type='checkbox' key={idx}>
-            <input id='' type='checkbox' />
-
+          <li key={idx} className={list.isChecked ? 'done' : ''}>
+            <input
+              checked={list.isChecked}
+              type='checkbox'
+              onChange={() => updateListOfItems(idx, !list.isChecked)}
+            />
             {list.listItem}
             {list.addItem}
             <button onClick={() => deleteId(idx)}>Remove</button>
