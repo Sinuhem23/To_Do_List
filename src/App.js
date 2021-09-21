@@ -1,12 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
-import useLocalStorage from './Hooks/useLocalStorage';
+// import useLocalStorage from './Hooks/useLocalStorage';
 import './App.css';
 
 export default function App() {
   // Using useState
   // const [todo, setTodo] = useState([
   // Using LocalStorage instead of useState (check the localStorage file)
-  const [todo, setTodo] = useLocalStorage('todos', [
+  const [todo, setTodo] = useState('todos', [
     {
       defaultItem: 'Wake up',
       isChecked: true,
